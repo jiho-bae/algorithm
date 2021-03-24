@@ -1,2 +1,3 @@
-# baekjoon_algorithm
+# Algorithm
+
 Records of Algorithm Study
