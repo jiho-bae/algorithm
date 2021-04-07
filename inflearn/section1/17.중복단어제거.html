@@ -1,0 +1,41 @@
+// 1. Array.indexOf
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = [];
+        for (let i = 0; i < s.length; i++) {
+          if (s.indexOf(s[i]) === i) answer.push(s[i]);
+        }
+        return answer;
+      }
+      let str = ["good", "time", "good", "time", "student"];
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 2. filter + Array.indexOf
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        answer = s.filter((v, i) => s.indexOf(v) === i);
+        return answer;
+      }
+      let str = ["good", "time", "good", "time", "student"];
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "";
+        for (let x of s) {
+          if (x === x.toLowerCase()) answer += x.toUpperCase();
+          else answer += x;
+        }
+        return x;
+      }
+
+      let str = "ItisTimeToStudy";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 2. Ascii
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "";
+        for (let x of s) {
+          let num = x.charCodeAt();
+          if (num >= 97 && num <= 122) answer += String.fromCharCode(num - 32);
+          else answer += x;
+        }
+        return x;
+      }
+
+      let str = "ItisTimeToStudy";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 3. 사실 이렇게 할 필요가 없다..하나씩 조회할 필요가 없다!
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        return s.toUpperCase();
+      }
+
+      let str = "ItisTimeToStudy";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

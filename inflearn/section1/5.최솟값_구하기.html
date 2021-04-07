@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let min = Number.MAX_SAFE_INTEGER;
+        for (let i = 0; i < arr.length; i++) {
+          if (min > arr[i]) min = arr[i];
+        }
+        return min;
+      }
+
+      let arr = [5, 3, 7, 11, 22, 15, 17];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

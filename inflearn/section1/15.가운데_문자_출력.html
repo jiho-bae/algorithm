@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "";
+        let index = Math.floor(s.length / 2);
+        if (s.length % 2 === 1) {
+          answer = s[index];
+        } else {
+          answer += s[index - 1];
+          answer += s[index];
+        }
+        return answer;
+      }
+      console.log(solution("study"));
+    </script>
+  </body>
+</html>
+
+// 2. substring
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        let index = Math.floor(s.length / 2);
+        if (s.length % 2 === 1) {
+          answer = s.substring(index, index + 1);
+        } else {
+          answer = s.substring(index - 1, index + 1);
+          // substring(a,b) => a 인덱스 포함, b 인덱스 제외
+        }
+        return answer;
+      }
+      console.log(solution("study"));
+    </script>
+  </body>
+</html>
+
+// 3. substr
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        let index = Math.floor(s.length / 2);
+        if (s.length % 2 === 1) {
+          answer = s.substr(index, 2);
+        } else {
+          answer = s.substr(index - 1, 2);
+          // substring(a,b) => a 인덱스 부터, b개 추출
+        }
+        return answer;
+      }
+      console.log(solution("study"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(a, b, c) {
+        let max = a;
+        let answer = "YES";
+
+        if (max < b) max = b;
+        if (max < c) max = c;
+
+        if (max < a + b + c - max) answer = "NO";
+        return answer;
+      }
+      console.log(solution(6, 7, 11));
+      console.log(solution(13, 33, 17));
+    </script>
+  </body>
+</html>
