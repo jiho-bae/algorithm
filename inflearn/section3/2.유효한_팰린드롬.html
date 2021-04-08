@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let pureS = "";
+        s = s.toLowerCase();
+
+        for (let i of s) {
+          if (i >= "a" && i <= "z") pureS += i;
+        }
+
+        let reversePureS = pureS.split("").reverse().join("");
+
+        if (reversePureS === pureS) return "YES";
+        return "NO";
+      }
+
+      let str = "found7, time: study; Yduts; emit, 7Dnuof";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 2. 정규식 (/[^a-z]/g 는 문자열에서 소문자가 아닌 모든 문자를 "" 으로 바꾼다.)
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        s = s.toLowerCase().replace(/[^a-z]/g, "");
+
+        if (s.split("").reverse().join("") === s) return "YES";
+        return "NO";
+      }
+
+      let str = "found7, time: study; Yduts; emit, 7Dnuof";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

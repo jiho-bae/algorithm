@@ -1,0 +1,47 @@
+// 1. 직접 비교
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        const len = s.length;
+        s = s.toLowerCase();
+
+        for (let i = 0; i < Math.floor(len / 2); i++) {
+          if (s[i] !== s[len - i - 1]) return "No";
+        }
+        return "Yes";
+      }
+
+      let str = "gooG";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 2. split + reverse
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        s = s.toLowerCase();
+        let reverseS = s.split("").reverse().join("");
+
+        if (reverseS === s) return "Yes";
+        return "No";
+      }
+
+      let str = "gooG";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
