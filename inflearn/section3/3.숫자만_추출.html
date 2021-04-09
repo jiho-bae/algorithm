@@ -1,0 +1,65 @@
+// 1. 정규식
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        str = str.replace(/[^0-9]/g, "");
+        return +str;
+      }
+
+      let str = "g0en2T0s8eSoft";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 2. 정규식 없이 풀어보기 (참고 : +"0" === parseInt("0") === Number("0") )
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer = "";
+        for (let x of str) {
+          if (!isNaN(x)) answer += x;
+        }
+        return parseInt(answer);
+      }
+
+      let str = "g0en2T0s8eSoft";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+
+// 3. 2번에서 answer를 숫자로 선언해서 풀어보기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer = 0;
+        for (let x of str) {
+          if (!isNaN(x)) answer = answer * 10 + +x;
+        }
+        return answer;
+      }
+
+      let str = "g0en2T0s8eSoft";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

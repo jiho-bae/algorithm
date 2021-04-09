@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, t) {
+        const answer = [];
+        const len = s.length;
+        let p = 1000;
+
+        for (let i = 0; i < len; i++) {
+          if (s[i] !== t) {
+            answer.push(++p);
+          } else {
+            answer.push((p = 0));
+          }
+        }
+
+        p = 1000;
+
+        for (let i = len - 1; i >= 0; i--) {
+          if (s[i] !== t) {
+            answer[i] = Math.min(++p, answer[i]);
+          } else {
+            p = 0;
+            // answer[i] = 0 생략가능
+          }
+        }
+
+        return answer;
+      }
+
+      let str = "teachermode";
+      console.log(solution(str, "e"));
+    </script>
+  </body>
+</html>

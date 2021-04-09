@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, t) {
+        let answer = "";
+        let index = 0;
+        const indexE = [];
+
+        while (true) {
+          let findIndex = s.indexOf(t, index);
+          if (findIndex === -1) break;
+          index = findIndex + 1;
+          indexE.push(findIndex);
+        }
+        for (let i = 0; i < s.length; i++) {
+          const distance = [];
+
+          for (let j = 0; j < indexE.length; j++) {
+            if (indexE[j] === i) {
+              answer += 0;
+              break;
+            }
+            distance.push(Math.abs(i - indexE[j]));
+          }
+          if (parseInt(answer[i]) === 0) continue;
+          answer += Math.min(...distance);
+        }
+        return answer;
+      }
+
+      let str = "teachermode";
+      console.log(solution(str, "e"));
+    </script>
+  </body>
+</html>

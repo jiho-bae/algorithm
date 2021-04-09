@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer = "";
+        let count = 1;
+        let current = "";
+
+        for (let i = 0; i <= s.length; i++) {
+          if (current === s[i]) {
+            count++;
+          } else {
+            answer += `${current}${count === 1 ? "" : count}`;
+            current = s[i];
+            count = 1;
+          }
+        }
+        console.log(answer);
+      }
+
+      let str = "KKHSSSSSSSE";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
