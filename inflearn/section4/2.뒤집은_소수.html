@@ -1,0 +1,72 @@
+1 // string + split + reverse + join 문자열로 바꿔서 뒤집기. // 소수 판별 시
+약수의 특징에 의해 숫자 크기의 절반만 조회해도 된다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isPrime(num) {
+        if (num === 1) return false;
+        for (let i = 2; i <= num / 2; i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      }
+      function solution(arr) {
+        const answer = [];
+
+        for (let x of arr) {
+          const reverseX = +String(x).split("").reverse().join("");
+
+          if (isPrime(reverseX)) answer.push(reverseX);
+        }
+
+        return answer;
+      }
+
+      let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+2 // 숫자 자체를 가지고 연산자와 while을 활용해 뒤집기 // 소수 판별 시 숫자의
+제곱근까지만 조회해도 된다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isPrime(num) {
+        if (num === 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      }
+
+      function solution(arr) {
+        const answer = [];
+
+        for (let x of arr) {
+          let reverseX = 0;
+          while (x) {
+            let t = x % 10;
+            reverseX = reverseX * 10 + t;
+            x = parseInt(x / 10);
+          }
+          if (isPrime(reverseX)) answer.push(reverseX);
+        }
+        return answer;
+      }
+      let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

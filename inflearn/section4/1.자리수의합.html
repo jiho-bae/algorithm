@@ -1,0 +1,69 @@
+1 // 내림차순으로 정렬하고, split + reduce 조합으로 각 자릿수를 더한 값 sum과
+기존의 maxSum 값을 비교하기 // 내림차순으로 정렬하고, 비교 연산자에 > 을
+사용하므로 가장 자릿수가 크고, 각 자릿수 숫자들의 합이 큰 숫자가 출력된다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, arr) {
+        let maxSum = Number.MIN_SAFE_INTEGER;
+        let answer;
+        arr.sort((a, b) => b - a);
+
+        for (let x of arr) {
+          const sum = String(x)
+            .split("")
+            .reduce((sum, value) => sum + Number(value), 0);
+          if (sum > maxSum) {
+            maxSum = sum;
+            answer = x;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [128, 460, 603, 40, 521, 137, 123];
+      console.log(solution(7, arr));
+    </script>
+  </body>
+</html>
+
+2 // 정렬 없이 숫자 자체와 if, while문을 사용하기.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, arr) {
+        let maxSum = Number.MIN_SAFE_INTEGER;
+        let answer;
+
+        for (let x of arr) {
+          let temp = x;
+          let sum = 0;
+          while (temp) {
+            sum += temp % 10;
+            temp = Math.floor(temp / 10);
+          }
+          if (sum > maxSum) {
+            maxSum = sum;
+            answer = x;
+          } else if (sum === maxSum) {
+            if (x > answer) answer = x;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [128, 460, 603, 40, 521, 137, 123];
+      console.log(solution(7, arr));
+    </script>
+  </body>
+</html>
