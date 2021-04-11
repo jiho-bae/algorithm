@@ -1,0 +1,81 @@
+//1. 우선 최대한 사보고, 더 못 살때 남은 선물 중 쿠폰 적용 대상 확인하기.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, product) {
+        let sum = 0;
+        let count = 0;
+        let sale = Number.MAX_SAFE_INTEGER;
+        product.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+
+        for (let x of product) {
+          const xSum = x[0] + x[1];
+          if (m >= sum + xSum) {
+            sum += xSum;
+            count++;
+          } else if (sale > x[0] / 2 + x[1]) sale = x[0] / 2 + x[1];
+        }
+        if (m >= sum + sale) {
+          sum += sale;
+          count++;
+        }
+        console.log(m, sum, count);
+      }
+
+      let arr = [
+        [6, 6],
+        [2, 2],
+        [4, 3],
+        [4, 5],
+        [10, 3],
+      ];
+      console.log(solution(28, arr));
+    </script>
+  </body>
+</html>
+
+// 2번째. 모든 선물에 쿠폰을 한번 씩 적용해보고, 나머지를 더한 것 중 조건을
+만족하는 갯수가 가장 많은 쿠폰 적용 케이스를 찾기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, product) {
+        let answer = 0;
+        const n = product.length;
+        product.sort((a, b) => a[0] + a[1] - b[0] - b[1]);
+        for (let i = 0; i < n; i++) {
+          let money = m - (product[i][0] / 2 + product[i][1]);
+          let cnt = 1;
+          for (let j = 0; j < n; j++) {
+            if (j !== i && product[j][0] + product[j][1] > money) break;
+            if (j !== i && product[j][0] + product[j][1] <= money) {
+              money = money - (product[j][0] + product[j][1]);
+              cnt++;
+            }
+          }
+          if (cnt > answer) answer = cnt;
+        }
+        return answer;
+      }
+
+      let arr = [
+        [6, 6],
+        [2, 2],
+        [4, 3],
+        [4, 5],
+        [10, 3],
+      ];
+      console.log(solution(28, arr));
+    </script>
+  </body>
+</html>
