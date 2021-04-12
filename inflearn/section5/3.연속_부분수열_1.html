@@ -1,0 +1,94 @@
+1. 첫 코드. for + while // O(n^2)
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let count = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          let p1 = i;
+          let sum = 0;
+
+          while (p1 < arr.length) {
+            sum += arr[p1++];
+            if (sum === m) {
+              count++;
+              break;
+            } else if (sum > m) {
+              break;
+            }
+          }
+        }
+        return count;
+      }
+      let a = [1, 2, 1, 3, 1, 1, 1, 2];
+      console.log(solution(6, a));
+    </script>
+  </body>
+</html>
+
+2. two pointers algorithm. while
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let count = 0;
+        let sum = 0;
+        let lt = (rt = 0);
+
+        while (rt < arr.length) {
+          if (sum === m) {
+            sum -= arr[lt++];
+            count++;
+          } else if (sum < m) {
+            sum += arr[rt++];
+          } else if (sum > m) {
+            sum -= arr[lt++];
+          }
+        }
+        return count;
+      }
+      let a = [1, 2, 1, 3, 1, 1, 1, 2];
+      console.log(solution(6, a));
+    </script>
+  </body>
+</html>
+
+3. two pointers algorithm. for + while
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let count = 0;
+        let sum = (lt = 0);
+
+        for (let rt = 0; rt < arr.length; rt++) {
+          sum += arr[rt];
+          if (sum === m) count++;
+          while (sum >= m) {
+            sum -= arr[lt++];
+            if (sum === m) count++;
+          }
+        }
+        return count;
+      }
+      let a = [1, 2, 1, 3, 1, 1, 1, 2];
+      console.log(solution(6, a));
+    </script>
+  </body>
+</html>
