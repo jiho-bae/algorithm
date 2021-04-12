@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isAnagram(map1, map2) {
+        for (let [key, val] of map1) {
+          if (!map2.has(key) || map2.get(key) !== val) return false;
+        }
+        return true;
+      }
+
+      function solution(s, t) {
+        const map1 = new Map();
+        const map2 = new Map();
+        const tLen = t.length;
+        let count = 0;
+
+        for (let x of t) {
+          if (map2.has(x)) map2.set(x, map2.get(x) + 1);
+          else map2.set(x, 1);
+        }
+
+        for (let i = 0; i < tLen; i++) {
+          if (map1.has(s[i])) map1.set(s[i], map1.get(s[i]) + 1);
+          else map1.set(s[i], 1);
+        }
+
+        for (let i = tLen; i <= s.length; i++) {
+          if (isAnagram(map1, map2)) count++;
+
+          if (map1.get(s[i - tLen]) !== 1) {
+            map1.set(s[i - tLen], map1.get(s[i - tLen]) - 1);
+          } else {
+            map1.delete(s[i - tLen]);
+          }
+          if (map1.has(s[i])) map1.set(s[i], map1.get(s[i]) + 1);
+          else map1.set(s[i], 1);
+        }
+        return count;
+      }
+
+      let a = "bacaAacba";
+      let b = "abc";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
+
+2. 좀 더 깔끔하게 정리해보기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function isAnagram(map1, map2) {
+        if (map1.size !== map2.size) return false;
+        for (let [key, val] of map1) {
+          if (!map2.has(key) || map2.get(key) !== val) return false;
+        }
+        return true;
+      }
+
+      function solution(s, t) {
+        const map1 = new Map();
+        const map2 = new Map();
+        const tLen = t.length - 1;
+        let count = 0;
+
+        for (let x of t) {
+          if (map2.has(x)) map2.set(x, map2.get(x) + 1);
+          else map2.set(x, 1);
+        }
+
+        for (let i = 0; i < tLen; i++) {
+          if (map1.has(s[i])) map1.set(s[i], map1.get(s[i]) + 1);
+          else map1.set(s[i], 1);
+        }
+
+        let lt = 0;
+        for (let rt = tLen; rt < s.length; rt++) {
+          if (map1.has(s[rt])) map1.set(s[rt], map1.get(s[rt]) + 1);
+          else map1.set(s[rt], 1);
+
+          if (isAnagram(map1, map2)) count++;
+          if (map1.get(s[lt]) !== 1) {
+            map1.set(s[lt], map1.get(s[lt]) - 1);
+          } else {
+            map1.delete(s[lt]);
+          }
+
+          lt++;
+        }
+        return count;
+      }
+
+      let a = "bacaAacba";
+      let b = "abc";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
