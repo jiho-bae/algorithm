@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        const stack = [];
+
+        for (let x of s) {
+          if (isNaN(x)) {
+            let right = stack.pop();
+            let left = stack.pop();
+            switch (x) {
+              case "+":
+                stack.push(left + right);
+                break;
+              case "-":
+                stack.push(left - right);
+                break;
+              case "*":
+                stack.push(left * right);
+                break;
+              case "/":
+                stack.push(left / right);
+                break;
+            }
+          } else {
+            stack.push(Number(x));
+          }
+        }
+        return stack.pop();
+      }
+      let str = "352+*9-";
+      console.log(solution(str));
+      let str2 = "293/+3-";
+      console.log(solution(str2));
+    </script>
+  </body>
+</html>

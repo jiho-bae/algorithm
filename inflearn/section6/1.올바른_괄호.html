@@ -1,0 +1,55 @@
+1. string, count
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let count = 0;
+
+        for (let x of a) {
+          if (count < 0) return "NO";
+          if (x === "(") count++;
+          else count--;
+        }
+        if (count !== 0) return "NO";
+        return "YES";
+      }
+
+      let a = "(()(()))(()";
+      console.log(solution(a));
+    </script>
+  </body>
+</html>
+
+2. stack
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let stack = [];
+        for (let x of s) {
+          if (x === ")") stack.push(x);
+          else {
+            if (stack.length === 0) return "NO";
+            stack.pop();
+          }
+        }
+        if (stack.length > 0) return "NO";
+
+        return "YES";
+      }
+
+      let a = "(()(()))(()";
+      console.log(solution(a));
+    </script>
+  </body>
+</html>
