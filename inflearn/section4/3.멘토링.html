@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(test) {
+        const answer = [];
+        const m = test.length;
+        const n = test[0].length;
+
+        for (let i = 1; i <= n; i++) {
+          for (let j = 1; j <= n; j++) {
+            let flag = 1;
+            for (let k = 0; k < m; k++) {
+              const mento = test[k].indexOf(i);
+              const mentee = test[k].indexOf(j);
+              if (mento >= mentee) {
+                flag = 0;
+                break;
+              }
+            }
+            if (flag) answer.push([i, j]);
+          }
+        }
+        return answer;
+      }
+
+      let arr = [
+        [3, 4, 1, 2],
+        [4, 3, 2, 1],
+        [3, 1, 4, 2],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
