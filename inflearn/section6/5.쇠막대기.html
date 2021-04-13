@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        const stack = [];
+        let count = 0;
+
+        for (x of s) {
+          if (x === "(") stack.push(x);
+          else {
+            if (stack.pop() === "(") count += stack.length;
+            else count += 1;
+          }
+        }
+        return count;
+      }
+
+      let a = "()(((()())(())()))(())";
+      console.log(solution(a));
+    </script>
+  </body>
+</html>
