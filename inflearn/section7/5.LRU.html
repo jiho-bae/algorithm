@@ -1,0 +1,64 @@
+1. includes를 제외한 배열 메서드 쓰지 않기.
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(size, arr) {
+        const cash = Array.from({ length: size }, (v, i) => 0);
+
+        for (let x of arr) {
+          let pos = -1;
+          for (let i = 0; i < size; i++) if (x === hash[i]) pos = i;
+
+          if (pos === -1) {
+            for (let i = size - 1; i >= 1; i--) {
+              cash[i] = cash[i - 1];
+            }
+          } else {
+            for (let i = pos; i >= 1; i--) {
+              cash[i] = cash[i - 1];
+            }
+          }
+          cash[0] = x;
+        }
+        return cash;
+      }
+
+      let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>
+
+2. includes, splice, pop, unshift 사용해보기.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(size, arr) {
+        const cash = Array.from(new Array(size), () => 0);
+
+        for (let x of arr) {
+          const idx = cash.indexOf(x);
+          if (!idx) {
+            cash.pop();
+          } else {
+            cash.splice(idx, 1);
+          }
+          cash.unshift(x);
+        }
+        return cash;
+      }
+
+      let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>
