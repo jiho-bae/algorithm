@@ -1,0 +1,35 @@
+1. 스스로 풀어보기. 이진트리로 더해가다가, 만약 더하는게 Ckg를 넘으면 그
+상태에서 배열에 저장하고 탈출하자.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(c, arr) {
+        const n = arr.length;
+        let sum = 0;
+        let max = Number.MIN_SAFE_INTEGER;
+
+        function DFS(L, sum) {
+          if (sum > c) return;
+          if (L === n) {
+            console.log(sum);
+            max = Math.max(max, sum);
+            return;
+          }
+
+          DFS(L + 1, sum + arr[L]);
+          DFS(L + 1, sum);
+        }
+        DFS(0, sum);
+        return answer;
+      }
+
+      let arr = [81, 58, 42, 33, 61];
+      console.log(solution(259, arr));
+    </script>
+  </body>
+</html>

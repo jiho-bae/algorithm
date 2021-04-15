@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, ps, pt) {
+        let max = Number.MIN_SAFE_INTEGER;
+        let sum = 0;
+        let time = 0;
+
+        function DFS(L, sum, time) {
+          if (time > m) return;
+          if (L === ps.length) {
+            console.log(sum);
+            max = Math.max(max, sum);
+            return;
+          }
+          DFS(L + 1, sum + ps[L], time + pt[L]);
+          DFS(L + 1, sum, time);
+        }
+        DFS(0, sum, time);
+        return max;
+      }
+
+      let ps = [10, 25, 15, 6, 7];
+      let pt = [5, 12, 8, 3, 4];
+      console.log(solution(20, ps, pt));
+    </script>
+  </body>
+</html>
