@@ -1,0 +1,110 @@
+1. check 배열을 하나 만들고 이진트리의 리프노드의 끝에서 모든 계산을 한다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = "NO";
+        let ch = Array.from({ length: arr }, () => 0);
+        const target = arr.reduce((a, b) => a + b, 0) / 2;
+        function DFS(L) {
+          if (L === arr.length) {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+              if (ch[i] === 1) sum += arr[i];
+            }
+            if (sum === target) answer = "YES";
+            return;
+          }
+          ch[L] = 1;
+          DFS(L + 1);
+          ch[L] = 0;
+          DFS(L + 1);
+        }
+        DFS(0);
+        return answer;
+      }
+
+      let arr = [1, 3, 5, 6, 7, 10];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+2. 각 단계가 지나갈 수록 더해주거나 더해주지 않거나를 판단하고, 리프노드 끝에서
+간단하게 정답인지를 확인한다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        const target = arr.reduce((a, b) => a + b, 0) / 2;
+        let answer = "NO";
+        let sum = 0;
+
+        function DFS(L, sum) {
+          if (L === arr.length) {
+            if (sum === target) answer = "YES";
+            return;
+          }
+          sum += arr[L];
+          DFS(L + 1, sum);
+          sum -= arr[L];
+          DFS(L + 1, sum);
+        }
+        DFS(0, 0);
+        return answer;
+      }
+
+      let arr = [1, 3, 5, 6, 7, 10];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+3. 2와 유사하나, sum 변수를 직접 더하거나 빼주지 않고도 할 수 있다. 추가로 기존
+코드는 "YES" 발견 상관 없이 끝까지 돌아가야만 멈췄지만 flag변수를 추가함으로써
+이 다음부터 호출되는 함수들은 실행하지 않고 건너뛸 수 있다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        const target = arr.reduce((a, b) => a + b, 0) / 2;
+        let answer = "NO";
+        let sum = (flag = 0);
+        let n = arr.length;
+
+        function DFS(L, sum) {
+          if (flag) return;
+          if (L === n) {
+            if (sum === target) {
+              answer = "YES";
+              flag = 1;
+            }
+            return;
+          }
+          DFS(L + 1, sum + arr[L]);
+          DFS(L + 1, sum);
+        }
+        DFS(0, 0);
+        return answer;
+      }
+
+      let arr = [1, 3, 5, 6, 7, 10];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
