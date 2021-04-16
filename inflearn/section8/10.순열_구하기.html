@@ -1,0 +1,79 @@
+1. 한번 선택된 수는 더이상 선택되서는 안된다 그러기 위해서 filter함수를 이용해서
+선택된 수를 제외한 나머지 배열을 다음 재귀로 보냈다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let answer = [];
+        let tmp = Array.from({ length: m }, () => 0);
+
+        function DFS(L, rest) {
+          if (L === m) {
+            answer.push(tmp.slice());
+            return;
+          }
+
+          for (let i = 0; i < rest.length; i++) {
+            tmp[L] = rest[i];
+            DFS(
+              L + 1,
+              rest.filter((val) => val !== rest[i])
+            );
+          }
+        }
+        DFS(0, arr);
+        return answer;
+      }
+
+      let arr = [3, 6, 9];
+      console.log(solution(2, arr));
+    </script>
+  </body>
+</html>
+
+2. 기존 arr 자체를 변경하기 위해 filter함수를 이용하지 않고, 사용 여부를
+체크하는 배열 ch만 따로 만들고 배열을 체크해보자. 이렇게 하면 위와 다르게,
+for문의 조건에서 크기가 변하는 rest배열을 고려하지 않아도 된다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        const n = arr.length;
+        let answer = [];
+        let tmp = Array.from({ length: m }, () => 0);
+        let ch = Array.from({ length: n }, () => 0);
+
+        function DFS(L) {
+          if (L === m) {
+            answer.push(tmp.slice());
+            return;
+          }
+
+          for (let i = 0; i < n; i++) {
+            if (ch[i] === 0) {
+              ch[i] = 1;
+              tmp[L] = arr[i];
+              DFS(L + 1);
+              ch[i] = 0;
+            }
+          }
+        }
+        DFS(0);
+        return answer;
+      }
+
+      let arr = [3, 6, 9];
+      console.log(solution(2, arr));
+    </script>
+  </body>
+</html>

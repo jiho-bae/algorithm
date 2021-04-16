@@ -1,0 +1,83 @@
+1. 단순히 factorial 이용하기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, r) {
+        function factorial(n) {
+          if (n === 1) return 1;
+          return n * factorial(n - 1);
+        }
+        function ncr(n, r) {
+          return (
+            factorial(n - 1) / (factorial(n - r) * factorial(r - 1)) +
+            factorial(n - 1) / (factorial(n - 1 - r) * factorial(r))
+          );
+        }
+
+        return ncr(n, r);
+      }
+
+      console.log(solution(5, 3));
+      console.log(solution(33, 19));
+    </script>
+  </body>
+</html>
+
+2. nCr = n-1Cr-1 + n-1Cr 을 활용해서 1의 값이 나올 때 까지 재귀를 해보기 문제는,
+값이 조금 커지면 재귀가 너무 커진다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, r) {
+        let answer;
+        function DFS(n, r) {
+          if (r === 0 || n === r) return 1;
+          return DFS(n - 1, r - 1) + DFS(n - 1, r);
+        }
+        answer = DFS(n, r);
+        return answer;
+      }
+
+      console.log(solution(5, 3));
+      console.log(solution(33, 19));
+    </script>
+  </body>
+</html>
+
+3. 메모이제이션 이용해보기. 구한 값을 2차원 배열(n*r)에 저장해두고, 값이
+존재하면 순회하지 않고 값을 가져다 쓰기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, r) {
+        let answer;
+        let dy = Array.from(Array(n + 1), () => Array(r + 1).fill(0));
+        function DFS(n, r) {
+          if (dy[n][r] > 0) return dy[n][r];
+          if (r === 0 || n === r) return 1;
+          return (dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r));
+        }
+        answer = DFS(n, r);
+        return answer;
+      }
+
+      console.log(solution(5, 3));
+      console.log(solution(33, 19));
+    </script>
+  </body>
+</html>

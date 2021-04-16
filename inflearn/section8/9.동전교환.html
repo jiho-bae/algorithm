@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        const n = arr.length;
+        let min = Number.MAX_SAFE_INTEGER;
+
+        function DFS(L, sum) {
+          if (sum > m) return;
+          if (sum === m) {
+            min = Math.min(min, L);
+            return;
+          }
+
+          for (let i = 0; i < n; i++) {
+            DFS(L + 1, sum + arr[i]);
+          }
+        }
+        DFS(0, 0);
+        return min;
+      }
+
+      let arr = [1, 2, 5];
+      console.log(solution(15, arr));
+    </script>
+  </body>
+</html>
+
+2. 더 효율적으로 해보기 모든 가지를 방문해야 하기 때문에, 동전이 여러가지 있거나
+거스름돈이 더 크다면, 더 문제가 커진다 min값을 갱신하지만 조회하는 L값이 min값에
+비교해 크거나 같다면 최소 개수와 관계없으므로, 바로 멈춰버릴 수 있다
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        const n = arr.length;
+        let min = Number.MAX_SAFE_INTEGER;
+
+        function DFS(L, sum) {
+          if (L >= min) return;
+          if (sum > m) return;
+          if (sum === m) {
+            min = Math.min(min, L);
+            return;
+          }
+
+          for (let i = 0; i < n; i++) {
+            DFS(L + 1, sum + arr[i]);
+          }
+        }
+        DFS(0, 0);
+        return min;
+      }
+
+      let arr = [1, 2, 5];
+      console.log(solution(15, arr));
+    </script>
+  </body>
+</html>
