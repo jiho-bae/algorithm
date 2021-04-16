@@ -1,0 +1,31 @@
+1. 조합을 이용해 수를 뽑으면서, 합계를 구한다 총 합계가 m의 약수일 때 카운트
+변수를 증가시키면 된다.
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, k, arr, m) {
+        let count = 0;
+
+        function DFS(L, s, sum) {
+          if (L === k) {
+            if (sum % m === 0) count++;
+            return;
+          }
+          for (let i = s; i < n; i++) {
+            DFS(L + 1, i + 1, sum + arr[i]);
+          }
+        }
+        DFS(0, 0, 0);
+        return count;
+      }
+
+      let arr = [2, 4, 5, 8, 12];
+      console.log(solution(5, 3, arr, 6));
+    </script>
+  </body>
+</html>

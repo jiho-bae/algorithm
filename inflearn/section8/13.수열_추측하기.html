@@ -1,0 +1,105 @@
+1. 모든 경우의수에 대해 순회가 불가능하다 그러므로 이항계수와 순열을 이용해야
+한다!
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, f) {
+        let answer,
+          flag = 0;
+        let binary = Array.from({ length: n }, () => 0);
+        let dy = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
+
+        let ch = Array.from({ length: n + 1 }, () => 0);
+        let pick = Array.from({ length: n }, () => 0);
+
+        function combi(n, r) {
+          if (dy[n][r] > 0) return dy[n][r];
+          if (r === 0 || n === r) return 1;
+          return (dy[n][r] = combi(n - 1, r - 1) + combi(n - 1, r));
+        }
+
+        for (let i = 0; i < n; i++) {
+          binary[i] = combi(n - 1, i);
+        }
+        function DFS(L, sum) {
+          if (flag) return;
+          if (L === n && sum === f) {
+            answer = pick.slice();
+            flag = 1;
+            return;
+          }
+          for (let i = 1; i <= n; i++) {
+            if (ch[i] === 0) {
+              ch[i] = 1;
+              pick[L] = i;
+              DFS(L + 1, sum + binary[L] * pick[L]);
+              ch[i] = 0;
+            }
+          }
+        }
+        DFS(0, 0);
+        return answer;
+      }
+
+      console.log(solution(4, 16));
+    </script>
+  </body>
+</html>
+
+2. pick 배열을 push, pop 이용하기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, f) {
+        let answer,
+          flag = 0;
+        let binary = Array.from({ length: n }, () => 0);
+        let dy = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
+
+        let ch = Array.from({ length: n + 1 }, () => 0);
+        let pick = [];
+
+        function combi(n, r) {
+          if (dy[n][r] > 0) return dy[n][r];
+          if (r === 0 || n === r) return 1;
+          return (dy[n][r] = combi(n - 1, r - 1) + combi(n - 1, r));
+        }
+
+        for (let i = 0; i < n; i++) {
+          binary[i] = combi(n - 1, i);
+        }
+        function DFS(L, sum) {
+          if (flag) return;
+          if (L === n && sum === f) {
+            answer = pick.slice();
+            flag = 1;
+            return;
+          }
+          for (let i = 1; i <= n; i++) {
+            if (ch[i] === 0) {
+              ch[i] = 1;
+              pick.push(i);
+              DFS(L + 1, sum + binary[L] * pick[L]);
+              ch[i] = 0;
+              pick.pop();
+            }
+          }
+        }
+        DFS(0, 0);
+        return answer;
+      }
+
+      console.log(solution(4, 16));
+    </script>
+  </body>
+</html>
