@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution() {
+        let answer = "";
+        const queue = [];
+        queue.push(1);
+        while (queue.length) {
+          let v = queue.shift();
+          answer += v;
+          for (let nv of [2 * v, 2 * v + 1]) {
+            if (nv > 7) break;
+            queue.push(nv);
+          }
+        }
+        return answer;
+      }
+
+      console.log(solution());
+    </script>
+  </body>
+</html>

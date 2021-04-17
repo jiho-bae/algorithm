@@ -1,0 +1,55 @@
+1. 인접 리스트 활용해보기
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, arr) {
+        let count = 0;
+        let graph = Array.from(Array(n + 1), () => Array());
+        let ch = Array.from(Array(n + 1), () => 0);
+        for (let [a, b] of arr) {
+          graph[a].push(b);
+        }
+
+        let path = [];
+        function DFS(v) {
+          if (v === n) {
+            count++;
+            console.log(path);
+            return;
+          }
+          for (let nextNode of graph[v]) {
+            if (ch[nextNode] === 0) {
+              ch[nextNode] = 1;
+              path.push(nextNode);
+              DFS(nextNode);
+              ch[nextNode] = 0;
+              path.pop();
+            }
+          }
+        }
+
+        ch[1] = 1;
+        path.push(1);
+        DFS(1);
+        return count;
+      }
+      let arr = [
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [2, 1],
+        [2, 3],
+        [2, 5],
+        [3, 4],
+        [4, 2],
+        [4, 5],
+      ];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+1. 오류(cnt 값을 계산할 때 생각 실수.)
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, e) {
+        let cnt = 0;
+        let ch = Array.from({ length: 10001 }, () => 0);
+        const queue = [];
+        queue.push(s);
+        ch[s] = 1;
+
+        while (queue.length) {
+          const x = queue.shift();
+          for (let nx of [x - 1, x + 1, x + 5]) {
+            if (nx === e) return cnt + 1;
+            if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+              ch[nx] = 1;
+              queue.push(nx);
+            }
+          }
+          cnt++;
+        }
+        return cnt;
+      }
+
+      console.log(solution(5, 14));
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
+
+2. 돌아가는 코드(기존의 cnt값이 아닌 distance 배열을 만들었다.)
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, e) {
+        const ch = Array.from({ length: 10001 }, () => 0);
+        const dis = Array.from({ length: 10001 }, () => 0);
+        const queue = [];
+        ch[s] = 1;
+        queue.push(s);
+        dis[s] = 0;
+
+        while (queue.length) {
+          let x = queue.shift();
+          for (let nx of [x - 1, x + 1, x + 5]) {
+            if (nx === e) return dis[x] + 1;
+            if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+              ch[nx] = 1;
+              queue.push(nx);
+              dis[nx] = dis[x] + 1;
+            }
+          }
+        }
+      }
+
+      console.log(solution(5, 14));
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
+
+3. cnt를 이용하는 코드를 개선해보기. - 문제는 해당 레벨에 들어 있는 모든 수를
+pop하기 전에 cnt가 올라간다는 점이라서 해당 레벨에 있는 모든 수가 다 돌아가고,
+더이상 pop을 하지 못할 때(다음 레벨을 pop해야 할 때) cnt를 증가시키면 된다.
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, e) {
+        let L = 0;
+        let ch = Array.from({ length: 10001 }, () => 0);
+        const queue = [];
+        queue.push(s);
+        ch[s] = 1;
+
+        while (queue.length) {
+          let len = queue.length;
+          for (let i = 0; i < len; i++) {
+            let x = queue.shift();
+            for (let nx of [x - 1, x + 1, x + 5]) {
+              if (nx === e) return L + 1;
+              if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+                ch[nx] = 1;
+                queue.push(nx);
+              }
+            }
+          }
+          L++;
+        }
+        return L;
+      }
+
+      console.log(solution(5, 14));
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
