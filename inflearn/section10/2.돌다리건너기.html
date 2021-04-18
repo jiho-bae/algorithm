@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        let dy = Array.from({ length: n + 2 }, () => 0);
+        dy[0] = 1;
+        dy[1] = 1;
+        dy[2] = 2;
+        for (let i = 3; i <= n + 1; i++) {
+          dy[i] = dy[i - 1] + dy[i - 2] + dy[i - 3];
+        }
+        return dy[n + 1];
+      }
+
+      console.log(solution(7));
+    </script>
+  </body>
+</html>
+
+앞 문제와 거의 유사하지만, 돌다리를 제외한 처음 출발한 자리 + 마지막 도착해야
+하는 자리로 배열의 크기를 돌다리 개수 +2로 해야 한다. 돌다리를 건널 때 한번에
+1칸, 2칸, 3칸 중 원하는 만큼 건널 수 있다고 가정한다.
