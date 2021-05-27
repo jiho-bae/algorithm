@@ -9,6 +9,7 @@ const sol = (input) => {
   }
 
   const dfs = (L, cnt) => {
+    check[L] = 1;
     if (flag) return;
     if (cnt === 4) {
       flag = 1;
@@ -17,17 +18,14 @@ const sol = (input) => {
 
     for (let i = 0; i < N; i++) {
       if (adjM[L][i] === 1 && !check[i]) {
-        check[i] = 1;
         dfs(i, cnt + 1);
-        check[i] = 0;
       }
     }
+    check[L] = 0;
   };
 
   for (let i = 0; i < N; i++) {
-    check[i] = 1;
     dfs(i, 0);
-    check[i] = 0;
   }
   if (flag) return 1;
   return 0;
