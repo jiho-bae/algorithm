@@ -12,7 +12,7 @@ const sol = (input) => {
       for (next of [cur - 1, cur + 1, cur * 2]) {
         if (!visit[next] && next >= 0 && next <= 100000) {
           path[next] = cur;
-          visit[next] = 1;
+          visit[next] = time + 1;
           queue.push([next, time + 1]);
         }
       }
