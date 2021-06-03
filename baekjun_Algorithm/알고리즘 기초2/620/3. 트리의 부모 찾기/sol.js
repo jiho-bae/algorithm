@@ -12,9 +12,9 @@ const sol = (input) => {
   function bfs() {
     const queue = [];
     check[1] = 1;
-    for (let x of tree[1]) {
-      check[x] = 1;
-      queue.push(x);
+    for (let next of tree[1]) {
+      check[next] = 1;
+      queue.push(next);
     }
     while (queue.length) {
       const node = queue.shift();
@@ -30,6 +30,7 @@ const sol = (input) => {
   check = check.slice(2);
   let result = "";
   check.map((v) => (result += `${v}\n`));
+  console.log(tree);
   return result;
 };
 

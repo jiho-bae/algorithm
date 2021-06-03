@@ -3,39 +3,40 @@ const sol = (input) => {
   input = input.slice(1);
   const tree = {};
   for (let i = 0; i < N; i++) {
-    const [node, lt, rt] = input[i].split(" ");
-    tree[node] = [lt, rt];
+    const [node, left, right] = input[i].split(" ");
+    tree[node] = [left, right];
   }
 
-  let answer = "";
-  function preorder(root) {
-    if (root === ".") return;
-    const [lt, rt] = tree[root];
-    answer += `${root}`;
+  let result = "";
+
+  function preorder(node) {
+    if (node === ".") return;
+    const [lt, rt] = tree[node];
+    result += node;
     preorder(lt);
     preorder(rt);
   }
-  function inorder(root) {
-    if (root === ".") return;
-    const [lt, rt] = tree[root];
+  function inorder(node) {
+    if (node === ".") return;
+    const [lt, rt] = tree[node];
     inorder(lt);
-    answer += `${root}`;
+    result += node;
     inorder(rt);
   }
-  function postorder(root) {
-    if (root === ".") return;
-    const [lt, rt] = tree[root];
+  function postorder(node) {
+    if (node === ".") return;
+    const [lt, rt] = tree[node];
     postorder(lt);
     postorder(rt);
-    answer += `${root}`;
+    result += node;
   }
 
   preorder("A");
-  answer += "\n";
+  result += "\n";
   inorder("A");
-  answer += "\n";
+  result += "\n";
   postorder("A");
-  return answer;
+  return result;
 };
 
 const input = [];

@@ -2,6 +2,7 @@ const sol = (input) => {
   const N = +input[0];
   input = input.slice(1);
   const tree = Array.from({ length: N + 1 }, () => new Array());
+
   input.map((str) => {
     const [node, ...nextInfo] = str.split(" ").map(Number);
     for (let i = 0; i < nextInfo.length - 1; i += 2) {
@@ -10,25 +11,23 @@ const sol = (input) => {
   });
 
   let check = Array.from({ length: N + 1 }, () => 0);
-  let maxDist = Number.MIN_SAFE_INTEGER;
-  let maxNode = -1;
+  let max = { node: 0, dist: Number.MIN_SAFE_INTEGER };
+
   function dfs(node, dist) {
     check[node] = 1;
-    if (maxDist < dist) {
-      maxDist = dist;
-      maxNode = node;
-    }
+    if (max.dist < dist) max = { node, dist };
     for (let [nextNode, nextDist] of tree[node]) {
       if (check[nextNode]) continue;
       dfs(nextNode, dist + nextDist);
     }
   }
-  dfs(1, 0);
-  maxDist = 0;
 
+  dfs(1, 0);
+  max.dist = Number.MIN_SAFE_INTEGER;
   check = new Array(N + 1).fill(0);
-  dfs(maxNode, 0);
-  return maxDist;
+
+  dfs(max.node, 0);
+  return max.dist;
 };
 
 const input = [];

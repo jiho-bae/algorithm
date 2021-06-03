@@ -8,31 +8,25 @@ const sol = (input) => {
     tree[from].push([to, dist]);
     tree[to].push([from, dist]);
   });
-  tree.sort((a, b) => a[0] - b[0]);
 
   function bfs(s) {
     const check = new Array(N + 1).fill(0);
     const queue = [];
     queue.push([s, 0]);
-    let maxNode = 0;
-    let maxDist = 0;
+    let max = { node: 0, dist: 0 };
     while (queue.length) {
       const [node, dist] = queue.shift();
       if (check[node]) continue;
       check[node] = 1;
-      if (maxDist < dist) {
-        maxDist = dist;
-        maxNode = node;
-      }
+      if (max.dist < dist) max = { node, dist };
       for (let [nextNode, nextDist] of tree[node]) {
         queue.push([nextNode, dist + nextDist]);
       }
     }
-    return [maxNode, maxDist];
+    return max;
   }
 
-  const [_, result] = bfs(bfs(1)[0]);
-  return result;
+  return bfs(bfs(1).node).dist;
 };
 
 const input = [];
