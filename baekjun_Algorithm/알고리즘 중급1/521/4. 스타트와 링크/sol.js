@@ -1,34 +1,34 @@
 const sol = (input) => {
   const N = +input[0];
-  const arr = [];
-  for (let i = 1; i <= N; i++) {
-    arr.push(input[i].split(" ").map((v) => +v));
-  }
+  const halfN = N / 2;
+  const stats = input.slice(1).map((str) => str.split(" ").map(Number));
 
-  const temp = new Array(N).fill(0);
+  const check = new Array(N).fill(0);
   let min = Number.MAX_SAFE_INTEGER;
   function dfs(L, K) {
-    if (L === N / 2) {
-      const sArr = [];
-      const lArr = [];
+    if (L === halfN) {
+      const sTeam = [];
+      const lTeam = [];
       let sSum = (lSum = 0);
       for (let i = 0; i < N; i++) {
-        if (temp[i]) sArr.push(i);
-        else lArr.push(i);
+        if (check[i]) sTeam.push(i);
+        else lTeam.push(i);
       }
-      for (let i = 0; i < N / 2; i++) {
-        for (let j = i + 1; j < N / 2; j++) {
-          sSum = sSum + arr[sArr[i]][sArr[j]] + arr[sArr[j]][sArr[i]];
-          lSum = lSum + arr[lArr[i]][lArr[j]] + arr[lArr[j]][lArr[i]];
+      for (let i = 0; i < halfN; i++) {
+        for (let j = i + 1; j < halfN; j++) {
+          console.log(sTeam[i], sTeam[j], sTeam[j], sTeam[i]);
+          sSum = sSum + stats[sTeam[i]][sTeam[j]] + stats[sTeam[j]][sTeam[i]];
+          lSum = lSum + stats[lTeam[i]][lTeam[j]] + stats[lTeam[j]][lTeam[i]];
         }
       }
       min = Math.min(min, Math.abs(sSum - lSum));
       return;
     }
+
     for (let i = K; i < N; i++) {
-      temp[i] = 1;
+      check[i] = 1;
       dfs(L + 1, i + 1);
-      temp[i] = 0;
+      check[i] = 0;
     }
   }
   dfs(0, 0);
