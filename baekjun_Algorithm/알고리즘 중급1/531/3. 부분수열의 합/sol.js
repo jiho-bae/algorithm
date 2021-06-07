@@ -1,7 +1,8 @@
 const sol = (input) => {
   const N = +input[0];
   const S = input[1].split(" ").map(Number);
-  const sumArr = new Array(2000001).fill(0);
+  const MAX_SUM = 2000001;
+  const sumArr = new Array(MAX_SUM).fill(0);
   const pick = [];
   function dfs(L) {
     if (L === N) {
@@ -16,7 +17,7 @@ const sol = (input) => {
   }
   dfs(0);
 
-  for (let i = 1; i < sumArr.length; i++) if (!sumArr[i]) return i;
+  for (let i = 1; i < MAX_SUM; i++) if (!sumArr[i]) return i;
 };
 
 const input = [];
