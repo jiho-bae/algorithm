@@ -1,12 +1,10 @@
 const sol = (input) => {
   const [N, M] = input[0].split(" ").map(Number);
-  const arr = input.slice(1).map((str) => str.split(""));
+  const board = input.slice(1).map((str) => str.split(""));
   const coin = [];
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < M; j++) {
-      if (arr[i][j] === "o") {
-        coin.push([i, j]);
-      }
+      if (board[i][j] === "o") coin.push([i, j]);
     }
   }
 
@@ -14,15 +12,15 @@ const sol = (input) => {
   const dy = [0, 1, 0, -1];
   let min = Number.MAX_SAFE_INTEGER;
 
-  function drop(x, y) {
+  function checkDrop(x, y) {
     if (x < 0 || y < 0 || x >= N || y >= M) return true;
     return false;
   }
 
   function checkWall(x, y, idx) {
     const [nx, ny] = [x + dx[idx], y + dy[idx]];
-    if (arr[nx]) {
-      if (arr[nx][ny] === "#") return [x, y];
+    if (board[nx]) {
+      if (board[nx][ny] === "#") return [x, y];
     }
     return [nx, ny];
   }
@@ -30,8 +28,8 @@ const sol = (input) => {
   function dfs(cnt, x1, y1, x2, y2) {
     if (cnt >= min) return;
     if (cnt > 10) return;
-    if (drop(x1, y1) && drop(x2, y2)) return;
-    if (drop(x1, y1) || drop(x2, y2)) {
+    if (checkDrop(x1, y1) && checkDrop(x2, y2)) return;
+    if (checkDrop(x1, y1) || checkDrop(x2, y2)) {
       min = Math.min(min, cnt);
       return;
     }

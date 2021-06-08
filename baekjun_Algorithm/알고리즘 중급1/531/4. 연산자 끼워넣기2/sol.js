@@ -26,7 +26,8 @@ const sol = (input) => {
     for (let i = 0; i < 4; i++) {
       if (!operator[i]) continue;
       operator[i] -= 1;
-      dfs(L + 1, operObj[i](temp, numbers[L + 1]));
+      const nextTemp = operObj[i](temp, numbers[L + 1]);
+      dfs(L + 1, nextTemp);
       operator[i] += 1;
     }
   }
