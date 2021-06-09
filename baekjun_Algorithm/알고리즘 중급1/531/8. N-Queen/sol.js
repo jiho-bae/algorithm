@@ -26,8 +26,6 @@ const sol = (N) => {
   dfs(0);
   return cnt;
 };
-
-const input = [];
 require("readline")
   .createInterface(process.stdin, process.stdout)
   .on("line", (line) => {
