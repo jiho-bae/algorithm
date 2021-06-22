@@ -1,17 +1,12 @@
 function solution(number, k) {
-  let answer = [];
-  let len = number.length;
-  let max = Number.MIN_SAFE_INTEGER;
-
-  function DFS(L, s, str) {
-    if (L === k) {
-      max = Math.max(str.replace(/k/g, ""), max);
-      return;
+  const stack = [];
+  for (let cur of number) {
+    while (k > 0 && stack[stack.length - 1] < cur) {
+      stack.pop();
+      k--;
     }
-    for (let i = s; i < len; i++) {
-      DFS(L + 1, i + 1, str.replace(str[i], "k"));
-    }
+    stack.push(cur);
   }
-  DFS(0, 0, number);
-  return String(max);
+  stack.splice(stack.length - k, k);
+  return stack.join("");
 }
