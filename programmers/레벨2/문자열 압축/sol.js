@@ -3,31 +3,28 @@ function solution(s) {
   const halfSLen = Math.floor(sLen / 2);
   let min = sLen;
 
-  for (let i = 1; i <= halfSLen; i++) {
-    let start = 0,
-      end = i,
+  for (let idx = 1; idx <= halfSLen; idx++) {
+    let startIdx = 0,
       cnt = 0,
       str = "",
       tmp = "";
-    while (start < sLen) {
-      const tmpStr = s.slice(start, end);
-      if (tmp === tmpStr) cnt++;
-      else if (tmp !== "" && cnt !== 1) {
-        str += `${cnt}${tmp}`;
-        tmp = tmpStr;
-        cnt = 1;
-      } else if (tmp !== "") {
-        str += tmp;
-        tmp = tmpStr;
-      } else {
-        tmp = tmpStr;
+    while (startIdx < sLen) {
+      const tmpStr = s.slice(startIdx, startIdx + idx);
+      startIdx += idx;
+      if (tmp === tmpStr) {
         cnt++;
+        continue;
       }
-      start = end;
-      end += i;
+      if (tmp !== "") {
+        if (cnt !== 1) {
+          str += `${cnt}${tmp}`;
+          cnt = 1;
+        } else str += tmp;
+      } else cnt++;
+      tmp = tmpStr;
     }
-    if (cnt !== 1) str += `${cnt}${tmp}`;
-    else str += tmp;
+
+    str += cnt !== 1 ? `${cnt}${tmp}` : tmp;
     min = Math.min(min, str.length);
   }
   return min;
