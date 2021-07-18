@@ -1,6 +1,7 @@
 function sol(input) {
   const numbers = input.match(/[0-9]+/g).map(Number);
   const operators = input.match(/[\-\+]/g);
+  const len = operators.length;
   for (let i = len - 1; i >= 0; i--) {
     if (operators[i] === "+") {
       const [operA, operB] = numbers.splice(i, 2);
