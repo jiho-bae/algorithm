@@ -1,20 +1,17 @@
 function sol(input) {
   const N = +input[0];
+  const arr = Array.from({ length: 51 }, () => new Array());
   let answer = "";
-  const arr = [];
+
   for (let i = 1; i <= N; i++) {
-    const [age, name] = input[i].split(" ");
-    arr.push([age, name]);
+    const len = input[i].length;
+    if (!arr[len].includes(input[i])) arr[len].push(input[i]);
   }
-  arr.sort((a, b) => {
-    if (a[0] === b[0]) return 0;
-    return a[0] - b[0];
-  });
 
-  arr.forEach(([age, name]) => {
-    answer += `${age} ${name}\n`;
+  arr.map((v) => v.sort());
+  arr.forEach((v) => {
+    if (v.length) answer += `${v.join("\n")}\n`;
   });
-
   return answer;
 }
 
