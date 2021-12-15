@@ -46,3 +46,5 @@ function solution(expression) {
 
   return answer;
 }
+
+module.exports = solution;
