@@ -7,12 +7,13 @@ const sol = (input) => {
     const queue = [];
     queue.push(knight);
     const visit = Array.from({ length: I }, () => Array(I).fill(0));
+    visit[knight[0]][knight[1]] = 1;
     const dx = [-2, -1, 1, 2, 2, 1, -1, -2];
     const dy = [1, 2, 2, 1, -1, -2, -2, -1];
     while (queue.length) {
       const [x, y] = queue.shift();
       if (x === target[0] && y === target[1]) {
-        result += `${visit[x][y]}\n`;
+        result += `${visit[x][y] - 1}\n`;
         break;
       }
       for (let i = 0; i < 8; i++) {
@@ -25,6 +26,7 @@ const sol = (input) => {
       }
     }
   }
+
   for (let i = 0; i < N; i++) {
     const I = +input[idx++];
     const knight = input[idx++].split(" ").map((v) => +v);

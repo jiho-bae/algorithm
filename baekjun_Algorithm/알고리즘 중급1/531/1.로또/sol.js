@@ -14,6 +14,7 @@ const sol = (input) => {
         dfs(i + 1, [...pick, S[i]]);
       }
     }
+
     dfs(0, []);
     answer += "\n";
   }

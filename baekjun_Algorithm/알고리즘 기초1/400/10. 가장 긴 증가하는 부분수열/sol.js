@@ -8,6 +8,7 @@ const sol = ([n, series]) => {
   for (let i = 1; i <= n; i++) {
     let min = 0;
     for (let j = 0; j < i; j++) {
+      console.log(i, "j", j, "dp", dp[i]);
       if (series[i] > series[j]) {
         if (min < dp[j]) min = dp[j];
       }
@@ -15,8 +16,10 @@ const sol = ([n, series]) => {
       if (max < dp[i]) max = dp[i];
     }
   }
+  console.log(dp);
   console.log(max);
 };
+
 const input = [];
 require("readline")
   .createInterface(process.stdin, process.stdout)

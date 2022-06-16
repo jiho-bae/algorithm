@@ -1,10 +1,10 @@
 const sol = (input) => {
-  const [N, M] = input[0].split(" ").map(Number);
-  const board = input.slice(1).map((str) => str.split(""));
+  const [N, M] = input[0].split(' ').map(Number);
+  const board = input.slice(1).map((str) => str.split(''));
   const coin = [];
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < M; j++) {
-      if (board[i][j] === "o") coin.push([i, j]);
+      if (board[i][j] === 'o') coin.push([i, j]);
     }
   }
 
@@ -20,7 +20,7 @@ const sol = (input) => {
   function checkWall(x, y, idx) {
     const [nx, ny] = [x + dx[idx], y + dy[idx]];
     if (board[nx]) {
-      if (board[nx][ny] === "#") return [x, y];
+      if (board[nx][ny] === '#') return [x, y];
     }
     return [nx, ny];
   }
@@ -46,12 +46,12 @@ const sol = (input) => {
 };
 
 const input = [];
-require("readline")
+require('readline')
   .createInterface(process.stdin, process.stdout)
-  .on("line", (line) => {
+  .on('line', (line) => {
     input.push(line);
   })
-  .on("close", () => {
+  .on('close', () => {
     console.log(sol(input));
     process.exit();
   });
