@@ -5,15 +5,15 @@
 // 탐색 : O(str.length)
 
 class Node {
-  constructor(data) {
-    this.data = data;
+  constructor() {
+    this.isContain = false;
     this.children = new Array(26);
   }
 }
 
 class Trie {
   constructor() {
-    this.root = new Node(null);
+    this.root = new Node();
   }
 
   insert(str) {
@@ -23,13 +23,13 @@ class Trie {
     for (let i = 0; i <= end; i++) {
       const idx = this.getIdx(str[i]);
       if (!node.children[idx]) {
-        node.children[idx] = new Node(null);
+        node.children[idx] = new Node();
       }
 
       node = node.children[idx];
     }
 
-    node.data = true;
+    node.isContain = true;
     return str;
   }
 
@@ -43,11 +43,7 @@ class Trie {
       node = node.children[idx];
     }
 
-    if (node.data) {
-      return true;
-    }
-
-    return false;
+    return node.isContain;
   }
 
   getIdx(char) {
